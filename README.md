@@ -1,5 +1,5 @@
 # E-Wallet-Backend
-This is Digital wallet project which transacts money from one user's wallet to another and simultaneously sends email notification to the respective users
+This is Digital wallet project which transacts money from one user's wallet to another and simultaneously sends email notifications to the respective users
 
 # Different Services In Project :
 1. User Services
@@ -17,8 +17,9 @@ This is Digital wallet project which transacts money from one user's wallet to a
 
 
 # Teck Stack Used :
-Spring-Boot
-Redis 
-Kafka
-MySQL
-OOPs Concepts
+1. Spring-Boot
+2. Redis 
+3. Kafka
+4. MySQL
+5. OOPs Concepts
+6. Java
