@@ -58,7 +58,7 @@ public class TransactionService {
         
     }
 
-    @KafkaListener(topics = "UPDATE_TRANSACTION", groupId = "friendsGroup")
+    @KafkaListener(topics = "UPDATE_TRANSACTION", groupId = "eWalletMsgGroup")
     public void updateTransaction(String message) throws JsonMappingException, JsonProcessingException {
         JSONObject transactionUpdate = objectMapper.readValue(message, JSONObject.class);
 
@@ -100,7 +100,9 @@ public class TransactionService {
         JSONObject emailRequest = new JSONObject();
 
         //SENDER should always receive email
-        String senderMessageBody = String.format("Hi %s the transaction with transactionId %s has been %s of Rs %d",
+        String senderMessageBody = String.format("Hi %s,\n" +
+                        "    The transaction with transactionId %s has been %s of Rs %d.\n\n " +
+                        "Thank You for using e-Wallet App. ",
                 senderName,transactionId,transaction.getTransactionStatus(),transaction.getAmount());
 
         emailRequest.put("email", senderEmail);
@@ -110,14 +112,17 @@ public class TransactionService {
 
         kafkaTemplate.send("SEND_MAIL", message);
 
-        // RECEIVER WILL GET MAIL ONLY WHEN TRANSACTION IS SUCCESSFULL
+        // RECEIVER WILL GET MAIL ONLY WHEN TRANSACTION IS SUCCESSFUL
+
         if(transaction.getTransactionStatus().equals("SUCCESS")) {
 
-            String receiverMessageBody = String.format("Hi %s you have received an amount of %d from %s",
+            String receiverMessageBody = String.format("Hi %s,\n" +
+                            "    You have received an amount of %d from %s.\n\n" +
+                            "Use \"e-Wallet\" and Get Exciting Rewards...",
                     receiverName,transaction.getAmount(),senderName);
 
-            emailRequest.put("email", senderEmail);
-            emailRequest.put("message" , senderMessageBody);
+            emailRequest.put("email", receiverEmail);
+            emailRequest.put("message" , receiverMessageBody);
 
             message = emailRequest.toString();
 

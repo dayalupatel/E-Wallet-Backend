@@ -19,7 +19,7 @@
 	<artifactId>e-wallet</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>e-wallet</name>
-	<description>A backend e-wallet project like a paytm clone coded in Spring Boot </description>
+	<description>A backend e-wallet project | like a paytm clone | coded in Spring Boot </description>
 	<properties>
 		<java.version>19</java.version>
 	</properties>
@@ -65,6 +65,18 @@
 			<artifactId>spring-kafka-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+   			<groupId>io.springfox</groupId>
+   			<artifactId>springfox-swagger-ui</artifactId>
+    		<version>2.9.2</version>
+		</dependency>
+		<dependency>
+    		<groupId>io.springfox</groupId>
+    		<artifactId>springfox-swagger2</artifactId>
+    		<version>2.9.2</version>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>

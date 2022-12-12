@@ -24,7 +24,7 @@ public class EmailSenderService {
     EmailRepository emailRepository;
 
 
-    @KafkaListener(topics = "SEND_MAIL", groupId = "friendsGroup")
+    @KafkaListener(topics = "SEND_MAIL", groupId = "eWalletMsgGroup")
     public void sendEmails(String message) throws JsonProcessingException {
         JSONObject mailRequest = objectMapper.readValue(message, JSONObject.class);
 

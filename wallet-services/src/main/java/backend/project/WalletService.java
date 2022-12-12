@@ -20,7 +20,7 @@ public class WalletService {
     @Autowired
     KafkaTemplate<String, String> kafkaTemplate;
 
-    @KafkaListener(topics = "CREATE_WALLET", groupId = "friendsGroup")
+    @KafkaListener(topics = "CREATE_WALLET", groupId = "eWalletMsgGroup")
     Wallet createWallet(String message) throws JsonProcessingException {
         // Decrypting the message and extracting userName
         JSONObject walletRequest = objectMapper.readValue(message, JSONObject.class);
@@ -75,7 +75,7 @@ public class WalletService {
         walletRepository.save(wallet);
     }
 
-    @KafkaListener(topics = "UPDATE_BALANCE", groupId = "friendsGroup")
+    @KafkaListener(topics = "UPDATE_BALANCE", groupId = "eWalletMsgGroup")
     public void updateWallet(String message) throws JsonProcessingException {
         System.out.println("I M Wallet msg received for UPDATE_BALANCE");
         // Decrypt Message
